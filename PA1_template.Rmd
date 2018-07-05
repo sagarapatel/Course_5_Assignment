@@ -2,7 +2,7 @@
 title: "Assignment"
 author: "Sagar Patel"
 date: "26 June 2018"
-output: "html_document"
+output: "github_document"
 ---
 
 ```{r setup, include = FALSE, cache = FALSE}

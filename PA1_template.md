@@ -1,13 +1,9 @@
----
-title: "Assignment"
-author: "Sagar Patel"
-date: "26 June 2018"
-output: "html_document"
----
+Assignment
+================
+Sagar Patel
+26 June 2018
 
-
-
-** Assignment Introduction**
+\*\* Assignment Introduction\*\*
 
 This is an R Markdown Assignment in HTML. This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
@@ -15,7 +11,7 @@ The data for this assignment can be downloaded from this link: <https://d396qusz
 
 **1. Code for reading in the dataset and processing the data**
 
-```r
+``` r
 # Loading Libraries
 library(ggplot2)
 library(dplyr)
@@ -29,10 +25,10 @@ amd$date <- as.Date(amd$date, '%Y-%m-%d')
 complete_amd <- data.frame(steps = numeric(), date = character(), interval = numeric())
 options(scipen=999)
 ```
-  
+
 **2. Histogram of the total number of steps taken each day**
 
-```r
+``` r
 # Group by total steps taken in a day
 date_amd <- amd %>%
                 drop_na() %>%
@@ -43,22 +39,21 @@ date_amd <- amd %>%
 with(date_amd, plot(date, total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'Histogram of total steps for each day', lwd = 5))
 ```
 
-![plot of chunk histo steps](figure/histo steps-1.png)
-  
+![](PA1_template_files/figure-markdown_github/histo%20steps-1.png)
+
 **3. Mean and median number of steps taken each day**
 
-```r
+``` r
 # Mean and median of steps
 mean_steps <- round(mean(date_amd$total_steps), 2)
 median_steps <- median(date_amd$total_steps)
 ```
 
+Mean for number of steps taken each day is 10766.19 and Median is 10765
 
-Mean for number of steps taken each day is 10766.19 and Median is 10765  
-  
 **4. Time series plot of the average number of steps taken**
 
-```r
+``` r
 # Group by average steps taken in a five minutes interval
 int_amd <- amd %>%
                 drop_na() %>%
@@ -69,19 +64,17 @@ int_amd <- amd %>%
 with(int_amd, plot(interval, avg_steps, type = 'l', xlab = 'Five Minutes Interval', ylab = 'Mean Steps by interval', main = 'Average steps taken every five minutes'))
 ```
 
-![plot of chunk average steps](figure/average steps-1.png)
+![](PA1_template_files/figure-markdown_github/average%20steps-1.png)
 
-**5. The 5-minute interval that, on average, contains the maximum number of steps**  
+**5. The 5-minute interval that, on average, contains the maximum number of steps**
 
-Five minute interval where average steps are highest is at 835.  
-  
-**6. Code to describe and show a strategy for imputing missing data**   
+Five minute interval where average steps are highest is at 835.
 
-Total number of rows with missing values are 2304.  
-  
-  
+**6. Code to describe and show a strategy for imputing missing data**
 
-```r
+Total number of rows with missing values are 2304.
+
+``` r
 # Extract first and last date of data
 first_date <- head(amd$date, n = 1)
 last_date <- tail(amd$date, n = 1)
@@ -109,7 +102,7 @@ while(first_date <= last_date) {
 
 **7. Histogram of the total number of steps taken each day after missing values are imputed**
 
-```r
+``` r
 # NEW complete data group, by total steps taken in a day
 new_date_amd <- complete_amd %>%
                     group_by(date) %>%
@@ -119,23 +112,22 @@ new_date_amd <- complete_amd %>%
 with(new_date_amd, plot(date, new_total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'New Histogram of total steps for each day', lwd = 5))
 ```
 
-![plot of chunk histo new steps](figure/histo new steps-1.png)
+![](PA1_template_files/figure-markdown_github/histo%20new%20steps-1.png)
 
-
-```r
+``` r
 # NEW mean and median of complete data
 new_mean_steps <- round(mean(new_date_amd$new_total_steps), 2)
 new_median_steps <- median(new_date_amd$new_total_steps)
 ```
 
-Mean with NA values : 10766.19   
-Mean replacing NA values : 10766.18    
-Median with NA values : 10765   
-Median replacing NA values : 10766.13  
+Mean with NA values : 10766.19
+Mean replacing NA values : 10766.18
+Median with NA values : 10765
+Median replacing NA values : 10766.13
 
 **8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends**
 
-```r
+``` r
 # Add a new column day of the week to complete data
 complete_amd$dayofweek <- weekdays(complete_amd$date)
 
@@ -164,4 +156,4 @@ gp <- ggplot(dayofweek_amd, aes(x = interval, y = day_avg_steps)) +
 print(gp)
 ```
 
-![plot of chunk weekdays and weekend](figure/weekdays and weekend-1.png)
+![](PA1_template_files/figure-markdown_github/weekdays%20and%20weekend-1.png)
