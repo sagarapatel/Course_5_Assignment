@@ -38,7 +38,7 @@ date_amd <- amd %>%
                 summarise(total_steps = sum(steps))
 
 # Plot a histogram by date
-with(date_amd, plot(date, total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'Histogram of total steps for each day', lwd = 7))
+with(date_amd, plot(date, total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'Histogram of total steps for each day', lwd = 5))
 ```
 
 ![plot of chunk histo steps](figure/histo steps-1.png)
@@ -114,7 +114,7 @@ new_date_amd <- complete_amd %>%
                     summarise(new_total_steps = round(sum(steps), 2))
 
 # NEW Histogram after replacing NA values
-with(new_date_amd, plot(date, new_total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'New Histogram of total steps for each day', lwd = 7))
+with(new_date_amd, plot(date, new_total_steps, type = 'h', xlab = 'Date', ylab = 'Total Steps per day', main = 'New Histogram of total steps for each day', lwd = 5))
 ```
 
 ![plot of chunk histo new steps](figure/histo new steps-1.png)
