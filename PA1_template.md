@@ -3,7 +3,6 @@ title: "Assignment"
 author: "Sagar Patel"
 date: "26 June 2018"
 output: html_document
-keep_md: TRUE
 ---
 
 ** Assignment Introduction**
